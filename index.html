@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cervical Cancer Awareness – Interactive Quiz</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pink: #D4537E;
+    --pink-light: #FBEAF0;
+    --pink-mid: #ED93B1;
+    --pink-dark: #72243E;
+    --teal: #1D9E75;
+    --teal-light: #E1F5EE;
+    --teal-dark: #085041;
+    --amber: #BA7517;
+    --amber-light: #FAEEDA;
+    --red: #E24B4A;
+    --red-light: #FCEBEB;
+    --green: #639922;
+    --green-light: #EAF3DE;
+    --purple: #534AB7;
+    --purple-light: #EEEDFE;
+    --gray-light: #F1EFE8;
+    --white: #ffffff;
+    --text: #2C2C2A;
+    --text-muted: #5F5E5A;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Nunito', sans-serif;
+    background: #1a1220;
+    color: var(--text);
+    overflow: hidden;
+  }
+
+  #app {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 2rem 5rem;
+    position: absolute;
+    top: 0; left: 0;
+    animation: fadeIn 0.4s ease;
+  }
+  .slide.active { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- SLIDE THEMES ---- */
+  .slide-cover {
+    background: linear-gradient(135deg, #3C3489 0%, #993556 60%, #D85A30 100%);
+    color: white;
+  }
+  .slide-ice { background: #f7f2fb; }
+  .slide-myth { background: #fff8f0; }
+  .slide-quiz { background: #f5fbf8; }
+  .slide-rapid { background: #fff0f5; }
+  .slide-roleplay { background: #f0f4ff; }
+  .slide-discuss { background: #fffbf0; }
+  .slide-feedback { background: #f0fbf7; }
+  .slide-end {
+    background: linear-gradient(135deg, #085041 0%, #3C3489 100%);
+    color: white;
+  }
+
+  /* ---- CARD ---- */
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+    width: 100%;
+    max-width: 820px;
+  }
+
+  /* ---- TYPOGRAPHY ---- */
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+  }
+  .tag-pink { background: var(--pink-light); color: var(--pink-dark); }
+  .tag-teal { background: var(--teal-light); color: var(--teal-dark); }
+  .tag-amber { background: var(--amber-light); color: #633806; }
+  .tag-purple { background: var(--purple-light); color: #3C3489; }
+  .tag-red { background: var(--red-light); color: #791F1F; }
+
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.15; }
+  h2 { font-size: clamp(1.4rem, 3.5vw, 2.2rem); font-weight: 800; margin-bottom: 1.2rem; }
+  h3 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 700; margin-bottom: 0.8rem; }
+  p { font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.7; color: var(--text-muted); }
+
+  /* ---- COVER SLIDE ---- */
+  .cover-inner { text-align: center; max-width: 700px; }
+  .cover-inner h1 { color: white; margin-bottom: 0.5rem; }
+  .cover-inner .subtitle { font-size: clamp(1rem, 2.5vw, 1.3rem); color: rgba(255,255,255,0.8); margin-top: 0.5rem; }
+  .cover-ribbon {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 8px 24px;
+    font-size: 0.9rem; color: white; margin-top: 1.5rem;
+  }
+  .ribbon-dot { width: 10px; height: 10px; background: #FAC775; border-radius: 50%; }
+
+  /* ---- ICEBREAKER ---- */
+  .bubble-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.2rem; }
+  .bubble {
+    background: var(--pink-light);
+    border: 2px solid var(--pink-mid);
+    border-radius: 18px 18px 18px 4px;
+    padding: 0.7rem 1.2rem;
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    font-weight: 600;
+    color: var(--pink-dark);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .bubble:hover, .bubble.selected {
+    background: var(--pink);
+    color: white;
+    transform: scale(1.04);
+  }
+  .source-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; margin-top: 1rem; }
+  .src-chip {
+    background: var(--teal-light);
+    border: 2px solid #9FE1CB;
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    font-weight: 700; font-size: 0.95rem;
+    color: var(--teal-dark);
+    text-align: center; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .src-chip:hover, .src-chip.selected { background: var(--teal); color: white; }
+
+  /* ---- MYTH vs FACT ---- */
+  .myth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+  .myth-card {
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    font-size: clamp(0.85rem, 1.8vw, 1rem);
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .myth-card:hover { transform: scale(1.02); }
+  .myth-card .badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 10px;
+    border-radius: 50px;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+  }
+  .myth-card.wrong { background: var(--red-light); color: #791F1F; }
+  .myth-card.wrong .badge { background: var(--red); color: white; }
+  .myth-card.right { background: var(--green-light); color: #173404; }
+  .myth-card.right .badge { background: var(--green); color: white; }
+  .myth-card .reveal { display: none; margin-top: 0.4rem; font-size: 0.9rem; font-weight: 600; color: var(--teal-dark); }
+  .myth-card.revealed .reveal { display: block; }
+
+  /* ---- MCQ QUIZ ---- */
+  .question-text {
+    font-size: clamp(1.1rem, 2.8vw, 1.6rem);
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 1.4rem;
+  }
+  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .option {
+    background: var(--gray-light);
+    border: 2.5px solid transparent;
+    border-radius: 14px;
+    padding: 0.9rem 1.2rem;
+    font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .option .letter {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: white; display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; font-weight: 800; flex-shrink: 0;
+    color: var(--text-muted);
+  }
+  .option:hover { border-color: var(--pink); background: var(--pink-light); }
+  .option.correct { background: var(--green-light); border-color: var(--green); color: #173404; }
+  .option.correct .letter { background: var(--green); color: white; }
+  .option.wrong { background: var(--red-light); border-color: var(--red); color: #791F1F; }
+  .option.wrong .letter { background: var(--red); color: white; }
+  .option.disabled { cursor: default; pointer-events: none; }
+  .quiz-progress {
+    display: flex; gap: 6px; margin-bottom: 1rem;
+  }
+  .qp-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #D3D1C7;
+  }
+  .qp-dot.done { background: var(--teal); }
+  .qp-dot.current { background: var(--pink); }
+
+  /* ---- RAPID FIRE ---- */
+  .rapid-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; }
+  .rapid-item {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--pink-light); border-radius: 14px;
+    padding: 0.9rem 1.2rem; font-size: clamp(0.95rem, 2vw, 1.1rem);
+    cursor: pointer; font-weight: 700; color: var(--pink-dark);
+    transition: all 0.2s;
+  }
+  .rapid-item .q-part { flex: 1; }
+  .rapid-item .a-part {
+    font-size: 1rem; font-weight: 800;
+    background: var(--pink); color: white;
+    padding: 4px 14px; border-radius: 50px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .rapid-item.shown .a-part { opacity: 1; }
+  .rapid-item.shown { background: var(--green-light); color: #173404; }
+  .rapid-item.shown .a-part { background: var(--green); }
+
+  /* ---- ROLE PLAY ---- */
+  .role-cards { display: flex; gap: 1.2rem; margin-top: 1rem; flex-wrap: wrap; }
+  .role-card {
+    flex: 1; min-width: 180px;
+    border-radius: 16px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+  .role-card .emoji { font-size: 3rem; margin-bottom: 0.5rem; }
+  .role-card h3 { margin-bottom: 0.2rem; }
+  .role-card p { font-size: 0.9rem; }
+  .role-card.doctor { background: var(--teal-light); color: var(--teal-dark); }
+  .role-card.patient { background: var(--pink-light); color: var(--pink-dark); }
+  .scenario-box {
+    background: var(--purple-light); border-radius: 14px;
+    padding: 1rem 1.2rem; margin-top: 1rem;
+    font-weight: 700; font-size: 1rem; color: #3C3489;
+  }
+
+  /* ---- GROUP DISCUSS ---- */
+  .discuss-q {
+    background: var(--amber-light); border-radius: 14px;
+    padding: 1.2rem 1.5rem; font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-weight: 800; color: #412402; margin-bottom: 1rem;
+  }
+  .answer-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .answer-chip {
+    background: white; border: 2px solid #FAC775;
+    border-radius: 50px; padding: 0.5rem 1.2rem;
+    font-size: 0.95rem; font-weight: 700; color: #633806;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .answer-chip:hover, .answer-chip.selected {
+    background: var(--amber); color: white; border-color: var(--amber);
+  }
+
+  /* ---- FEEDBACK ---- */
+  .feedback-prompt {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 700; color: var(--teal-dark);
+    background: var(--teal-light); border-radius: 14px;
+    padding: 1rem 1.4rem; margin-bottom: 1rem;
+  }
+  .feedback-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .feedback-box {
+    background: var(--gray-light); border-radius: 14px; padding: 1rem;
+  }
+  .feedback-box label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
+  .feedback-box textarea {
+    width: 100%; border: none; background: white; border-radius: 10px;
+    padding: 0.6rem 0.8rem; font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem; resize: none; height: 80px; outline: none;
+    color: var(--text);
+  }
+
+  /* ---- NAV ---- */
+  #nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2rem;
+    background: rgba(26,18,32,0.85);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+  .nav-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 1rem;
+    padding: 0.6rem 1.8rem; border-radius: 50px;
+    border: none; cursor: pointer;
+    transition: all 0.2s; letter-spacing: 0.02em;
+  }
+  #prev-btn { background: rgba(255,255,255,0.12); color: white; }
+  #prev-btn:hover { background: rgba(255,255,255,0.25); }
+  #next-btn { background: var(--pink); color: white; }
+  #next-btn:hover { background: var(--pink-dark); transform: scale(1.04); }
+  #slide-counter { color: rgba(255,255,255,0.6); font-size: 0.9rem; font-weight: 600; }
+  .slide-dots { display: flex; gap: 6px; align-items: center; }
+  .sdot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.25); cursor: pointer;
+    transition: all 0.2s;
+  }
+  .sdot.active { background: var(--pink); transform: scale(1.3); }
+
+  /* ---- END SLIDE ---- */
+  .end-inner { text-align: center; max-width: 600px; }
+  .end-inner h1 { color: white; margin-bottom: 0.8rem; }
+  .end-inner p { color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 1.5rem; }
+  .score-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 20px; padding: 1rem 2.5rem;
+    font-size: 1.5rem; font-weight: 900; color: #FAC775;
+    margin-bottom: 1.5rem;
+  }
+  .end-inner .restart-btn {
+    background: white; color: var(--pink-dark);
+    border: none; padding: 0.8rem 2.5rem;
+    border-radius: 50px; font-family: 'Nunito', sans-serif;
+    font-size: 1rem; font-weight: 800; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .end-inner .restart-btn:hover { transform: scale(1.05); }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .options-grid { grid-template-columns: 1fr; }
+    .myth-grid { grid-template-columns: 1fr; }
+    .feedback-boxes { grid-template-columns: 1fr; }
+    .nav-btn { padding: 0.5rem 1.2rem; font-size: 0.9rem; }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- SLIDE 0: COVER -->
+  <div class="slide slide-cover active" data-index="0">
+    <div class="cover-inner">
+      <div class="tag tag-pink" style="background:rgba(255,255,255,0.2);color:white;">Awareness Session</div>
+      <h1>Cervical Cancer<br>Awareness</h1>
+      <div class="subtitle">Interactive Quiz &amp; Discussion</div>
+      <div class="cover-ribbon">
+        <div class="ribbon-dot"></div>
+        Know It · Prevent It · Act On It
+        <div class="ribbon-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 1: ICEBREAKER -->
+  <div class="slide slide-ice" data-index="1">
+    <div class="card">
+      <div class="tag tag-pink">Icebreaker</div>
+      <h2>Have you heard about cervical cancer before?</h2>
+      <div class="bubble-row" id="heard-bubbles">
+        <div class="bubble" onclick="toggle(this)">Yes, I have!</div>
+        <div class="bubble" onclick="toggle(this)">No, this is new to me</div>
+        <div class="bubble" onclick="toggle(this)">A little bit</div>
+      </div>
+      <p style="margin-top:1.4rem; margin-bottom:0.7rem; font-weight:700; color:#2C2C2A;">If yes — where did you hear about it?</p>
+      <div class="source-grid">
+        <div class="src-chip" onclick="toggle(this)">🏫 School</div>
+        <div class="src-chip" onclick="toggle(this)">👩‍⚕️ Doctor / Hospital</div>
+        <div class="src-chip" onclick="toggle(this)">🌐 Internet / Social Media</div>
+        <div class="src-chip" onclick="toggle(this)">👯 Friends / Family</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: MYTH vs FACT -->
+  <div class="slide slide-myth" data-index="2">
+    <div class="card">
+      <div class="tag tag-amber">Myth vs Fact</div>
+      <h2>Myth or Fact? Tap each card to reveal!</h2>
+      <div class="myth-grid">
+        <div class="myth-card wrong" onclick="this.classList.toggle('revealed')">
+          <div class="badge">Myth ✗</div>
+          <div>Cervical cancer cannot be prevented</div>
+          <div class="reveal">It CAN be prevented with vaccination & screening!</div>
+        </div>
+        <div class="myth-card wrong" onclick="this.classList.toggle('revealed')">
+          <div class="badge">Myth ✗</div>
+          <div>Only older women get cervical cancer</div>
+          <div class="reveal">Young women are at risk too — especially without vaccination.</div>
+        </div>
+        <div class="myth-card right" onclick="this.classList.toggle('revealed')">
+          <div class="badge">Fact ✓</div>
+          <div>HPV vaccine can prevent cervical cancer</div>
+          <div class="reveal">Yes! The HPV vaccine is highly effective at prevention.</div>
+        </div>
+        <div class="myth-card right" onclick="this.classList.toggle('revealed')">
+          <div class="badge">Fact ✓</div>
+          <div>Screening is important even without symptoms</div>
+          <div class="reveal">Many cases show no symptoms early — regular Pap smears are vital.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDES 3–6: MCQ QUIZ -->
+  <div class="slide slide-quiz" data-index="3">
+    <div class="card">
+      <div class="tag tag-teal">Quiz — Q1 of 4</div>
+      <div class="quiz-progress">
+        <div class="qp-dot current"></div><div class="qp-dot"></div><div class="qp-dot"></div><div class="qp-dot"></div>
+      </div>
+      <div class="question-text">What is the main cause of cervical cancer?</div>
+      <div class="options-grid">
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">A</div>Bacteria</div>
+        <div class="option" data-correct="true"  onclick="answer(this,true)"><div class="letter">B</div>Virus (HPV)</div>
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">C</div>Fungi</div>
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">D</div>Pollution</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide slide-quiz" data-index="4">
+    <div class="card">
+      <div class="tag tag-teal">Quiz — Q2 of 4</div>
+      <div class="quiz-progress">
+        <div class="qp-dot done"></div><div class="qp-dot current"></div><div class="qp-dot"></div><div class="qp-dot"></div>
+      </div>
+      <div class="question-text">Which test helps detect cervical cancer early?</div>
+      <div class="options-grid">
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">A</div>Blood test</div>
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">B</div>X-ray</div>
+        <div class="option" data-correct="true"  onclick="answer(this,true)"><div class="letter">C</div>Pap smear</div>
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">D</div>ECG</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide slide-quiz" data-index="5">
+    <div class="card">
+      <div class="tag tag-teal">Quiz — Q3 of 4</div>
+      <div class="quiz-progress">
+        <div class="qp-dot done"></div><div class="qp-dot done"></div><div class="qp-dot current"></div><div class="qp-dot"></div>
+      </div>
+      <div class="question-text">Which of the following is a symptom of cervical cancer?</div>
+      <div class="options-grid">
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">A</div>Headache</div>
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">B</div>Fever</div>
+        <div class="option" data-correct="true"  onclick="answer(this,true)"><div class="letter">C</div>Abnormal vaginal bleeding</div>
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">D</div>Cough</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide slide-quiz" data-index="6">
+    <div class="card">
+      <div class="tag tag-teal">Quiz — Q4 of 4</div>
+      <div class="quiz-progress">
+        <div class="qp-dot done"></div><div class="qp-dot done"></div><div class="qp-dot done"></div><div class="qp-dot current"></div>
+      </div>
+      <div class="question-text">Cervical cancer can be prevented by:</div>
+      <div class="options-grid">
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">A</div>Exercise only</div>
+        <div class="option" data-correct="true"  onclick="answer(this,true)"><div class="letter">B</div>Vaccination &amp; screening</div>
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">C</div>Drinking more water</div>
+        <div class="option" data-correct="false" onclick="answer(this,false)"><div class="letter">D</div>Sleeping more</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: RAPID FIRE -->
+  <div class="slide slide-rapid" data-index="7">
+    <div class="card">
+      <div class="tag tag-pink">Rapid Fire Round</div>
+      <h2>Answer Quickly! Tap to reveal.</h2>
+      <ul class="rapid-list">
+        <li class="rapid-item" onclick="this.classList.toggle('shown')">
+          <span class="q-part">HPV is a type of virus</span>
+          <span class="a-part">TRUE ✓</span>
+        </li>
+        <li class="rapid-item" onclick="this.classList.toggle('shown')">
+          <span class="q-part">A vaccine for HPV is available</span>
+          <span class="a-part">YES ✓</span>
+        </li>
+        <li class="rapid-item" onclick="this.classList.toggle('shown')">
+          <span class="q-part">Only married women get cervical cancer</span>
+          <span class="a-part">FALSE ✗</span>
+        </li>
+        <li class="rapid-item" onclick="this.classList.toggle('shown')">
+          <span class="q-part">Screening is needed even without symptoms</span>
+          <span class="a-part">YES ✓</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: ROLE PLAY -->
+  <div class="slide slide-roleplay" data-index="8">
+    <div class="card">
+      <div class="tag tag-purple">Role Play Activity</div>
+      <h2>Let's Act It Out!</h2>
+      <div class="role-cards">
+        <div class="role-card doctor">
+          <div class="emoji">👩‍⚕️</div>
+          <h3>Participant 1</h3>
+          <p>Play the role of the <strong>Doctor</strong></p>
+        </div>
+        <div class="role-card patient">
+          <div class="emoji">👩</div>
+          <h3>Participant 2</h3>
+          <p>Play the role of the <strong>Patient</strong></p>
+        </div>
+      </div>
+      <div class="scenario-box">
+        Scenario: Doctor explains why a Pap smear is important and how it helps detect cervical cancer early.
+      </div>
+      <p style="margin-top:1rem;">Goal: Build confidence in talking about screening &amp; raise awareness through real conversation.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: GROUP DISCUSSION -->
+  <div class="slide slide-discuss" data-index="9">
+    <div class="card">
+      <div class="tag tag-amber">Group Discussion</div>
+      <h2>Let's Discuss Together</h2>
+      <div class="discuss-q">
+        Why do women avoid going for screening tests?
+      </div>
+      <p style="margin-bottom:0.8rem;">Tap the answers you hear from the group:</p>
+      <div class="answer-chips">
+        <div class="answer-chip" onclick="toggle(this)">Fear / Dard ka darr</div>
+        <div class="answer-chip" onclick="toggle(this)">Lack of awareness</div>
+        <div class="answer-chip" onclick="toggle(this)">Sharm / Hesitation</div>
+        <div class="answer-chip" onclick="toggle(this)">Social stigma</div>
+        <div class="answer-chip" onclick="toggle(this)">No time / Busy</div>
+        <div class="answer-chip" onclick="toggle(this)">Cost / Money</div>
+        <div class="answer-chip" onclick="toggle(this)">Husband/family doesn't allow</div>
+        <div class="answer-chip" onclick="toggle(this)">Other reason</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: FEEDBACK -->
+  <div class="slide slide-feedback" data-index="10">
+    <div class="card">
+      <div class="tag tag-teal">Feedback Activity</div>
+      <h2>One Thing You Learned Today</h2>
+      <div class="feedback-prompt">
+        Ask each participant to share — or write it on paper to collect!
+      </div>
+      <div class="feedback-boxes">
+        <div class="feedback-box">
+          <label>One new thing I learned...</label>
+          <textarea placeholder="e.g. HPV vaccine is available, Pap smear is important..."></textarea>
+        </div>
+        <div class="feedback-box">
+          <label>One action I will take home...</label>
+          <textarea placeholder="e.g. Tell my mother, book a Pap smear, ask my doctor..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: END -->
+  <div class="slide slide-end" data-index="11">
+    <div class="end-inner">
+      <div class="tag" style="background:rgba(255,255,255,0.15);color:white;">Session Complete</div>
+      <h1>Well Done, Everyone!</h1>
+      <p>You have taken the first step towards awareness.<br>Knowledge is the best prevention.</p>
+      <div class="score-badge" id="final-score">Quiz Score: 0 / 4</div>
+      <br>
+      <p style="font-size:0.95rem; color:rgba(255,255,255,0.7);">Remember: Get screened. Get vaccinated. Spread the word.</p>
+      <br>
+      <button class="restart-btn" onclick="restart()">Start Again</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAV BAR -->
+<div id="nav">
+  <button class="nav-btn" id="prev-btn" onclick="prevSlide()">← Back</button>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+    <div class="slide-dots" id="dots"></div>
+    <div id="slide-counter">1 / 12</div>
+  </div>
+  <button class="nav-btn" id="next-btn" onclick="nextSlide()">Next →</button>
+</div>
+
+<script>
+  const TOTAL = 12;
+  let current = 0;
+  let score = 0;
+  // Track which quiz slides have been answered to prevent double-scoring
+  const answered = {}; // slideIndex -> true
+
+  function buildDots() {
+    const c = document.getElementById('dots');
+    c.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++) {
+      const d = document.createElement('div');
+      d.className = 'sdot' + (i === current ? ' active' : '');
+      d.onclick = () => goTo(i);
+      c.appendChild(d);
+    }
+  }
+
+  function updateCounter() {
+    document.getElementById('slide-counter').textContent = (current + 1) + ' / ' + TOTAL;
+    buildDots();
+    document.getElementById('prev-btn').style.opacity = current === 0 ? '0.3' : '1';
+  }
+
+  function goTo(n) {
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.slide')[n].classList.add('active');
+    current = n;
+    updateCounter();
+    if (current === TOTAL - 1) {
+      document.getElementById('final-score').textContent = 'Quiz Score: ' + score + ' / 4';
+    }
+  }
+
+  function nextSlide() {
+    if (current < TOTAL - 1) goTo(current + 1);
+  }
+  function prevSlide() {
+    if (current > 0) goTo(current - 1);
+  }
+
+  function toggle(el) {
+    el.classList.toggle('selected');
+  }
+
+  function answer(el, correct) {
+    // Prevent answering the same question twice (e.g. navigating back and re-clicking)
+    if (answered[current]) return;
+    answered[current] = true;
+
+    const opts = el.closest('.options-grid').querySelectorAll('.option');
+
+    // Disable all options by adding CSS class (no onclick removal needed)
+    opts.forEach(o => o.classList.add('disabled'));
+
+    if (correct) {
+      el.classList.add('correct');
+      score++;
+    } else {
+      el.classList.add('wrong');
+      // Always highlight the correct option so audience learns the right answer
+      opts.forEach(o => {
+        if (o.dataset.correct === 'true') {
+          o.classList.add('correct');
+        }
+      });
+    }
+  }
+
+  function restart() {
+    score = 0;
+    // Clear answered tracking
+    Object.keys(answered).forEach(k => delete answered[k]);
+
+    // Reset option states
+    document.querySelectorAll('.option').forEach(o => {
+      o.classList.remove('correct', 'wrong', 'disabled');
+    });
+
+    // Reset myth cards
+    document.querySelectorAll('.myth-card').forEach(c => c.classList.remove('revealed'));
+
+    // Reset rapid fire items
+    document.querySelectorAll('.rapid-item').forEach(i => i.classList.remove('shown'));
+
+    // Reset toggleable chips/bubbles
+    document.querySelectorAll('.bubble, .src-chip, .answer-chip').forEach(c => c.classList.remove('selected'));
+
+    goTo(0);
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
+    if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+
+  updateCounter();
+</script>
+</body>
+</html>
