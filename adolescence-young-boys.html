@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adolescence in Boys</title>
+    <style>
+        :root {
+            --primary-bg: #f0f8ff;
+            --nav-bg: #bbdefb;
+            --text-color: #333;
+            --accent-color: #1976d2;
+            --slide-bg: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        nav {
+            background-color: var(--nav-bg);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1000;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+        }
+        .slide-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            background: var(--slide-bg);
+            padding: 50px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            animation: fadeIn 0.4s ease-out;
+            box-sizing: border-box;
+        }
+        .slide.active {
+            display: block;
+        }
+        h2 {
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+        }
+        ul {
+            text-align: left;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            display: inline-block;
+            margin: 0 auto;
+        }
+        p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+        }
+        .controls {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background-color: var(--primary-bg);
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(25, 118, 210, 0.3);
+        }
+        button:hover:not(:disabled) {
+            background-color: #0d47a1;
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            background-color: #90caf9;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+        #slideIndicator {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            min-width: 60px;
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @media (max-width: 600px) {
+            h2 { font-size: 1.8rem; }
+            p, ul { font-size: 1.1rem; }
+            .slide { padding: 30px 20px; }
+            nav { gap: 10px; }
+            nav a { font-size: 0.9rem; padding: 6px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Cervical Cancer Quiz</a>
+        <a href="cervical-cancer-awareness.html">Cervical Cancer Awareness</a>
+        <a href="menstruation-hygiene.html">Menstruation Health</a>
+        <a href="adolescence-young-boys.html">Adolescence in Boys</a>
+    </nav>
+
+    <div class="slide-container">
+        <div class="slide active">
+            <h2>Growing Up Strong</h2>
+            <p><strong>Understanding Adolescent Changes in Boys</strong><br>
+            Workshop for Boys (9–18 Years)</p>
+        </div>
+        <div class="slide">
+            <h2>Let’s Start with Fun!</h2>
+            <p><strong>True or Myth?</strong></p>
+            <ul>
+                <li>Voice change happens overnight</li>
+                <li>Only girls have mood swings</li>
+                <li>Height stops suddenly</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>What is Adolescence?</h2>
+            <ul>
+                <li>Age 9–18 years</li>
+                <li>Rapid physical & emotional changes</li>
+                <li>Child → Adult transition</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Physical Changes</h2>
+            <ul>
+                <li>Height increase</li>
+                <li>Voice deepening</li>
+                <li>Hair growth</li>
+                <li>Muscle development</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Common Concerns</h2>
+            <ul>
+                <li>Acne</li>
+                <li>Sweating</li>
+                <li>Uneven growth</li>
+                <li>Voice cracking</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Emotional Changes</h2>
+            <ul>
+                <li>Mood swings</li>
+                <li>Anger</li>
+                <li>Attraction</li>
+                <li>Confusion</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Let’s Talk!</h2>
+            <p>When do you feel angry or confused?<br>
+            <em>Share your thoughts</em></p>
+        </div>
+        <div class="slide">
+            <h2>Hygiene & Self-Care</h2>
+            <ul>
+                <li>Daily bathing</li>
+                <li>Clean clothes</li>
+                <li>Deodorant</li>
+                <li>Skin care</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Peer Pressure</h2>
+            <ul>
+                <li>Say NO to harmful habits</li>
+                <li>Choose good company</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Role Play</h2>
+            <p>A friend asks you to try smoking.<br>
+            <strong>What will you do?</strong></p>
+        </div>
+        <div class="slide">
+            <h2>Safety Awareness</h2>
+            <ul>
+                <li>Good touch vs Bad touch</li>
+                <li>Say NO</li>
+                <li>Tell a trusted adult</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Trusted People</h2>
+            <ul>
+                <li>Parents</li>
+                <li>Teachers</li>
+                <li>Doctor</li>
+                <li>Guardian</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Question Box</h2>
+            <p>Ask questions anonymously</p>
+        </div>
+        <div class="slide">
+            <h2>Quick Quiz</h2>
+            <ul>
+                <li>When does puberty start?</li>
+                <li>Is anger normal?</li>
+                <li>How often to bathe?</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>Changes are normal</li>
+                <li>Stay clean</li>
+                <li>Talk openly</li>
+                <li>Be confident</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Thank You</h2>
+            <p>Any questions?</p>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn" onclick="prevSlide()">Previous</button>
+        <span id="slideIndicator">1 / N</span>
+        <button id="nextBtn" onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideIndicator = document.getElementById('slideIndicator');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentSlideIndex) {
+                    slide.classList.add('active');
+                }
+            });
+            prevBtn.disabled = currentSlideIndex === 0;
+            nextBtn.disabled = currentSlideIndex === slides.length - 1;
+            slideIndicator.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSlides();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        updateSlides();
+    </script>
+</body>
+</html>

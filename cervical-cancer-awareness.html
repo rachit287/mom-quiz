@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cervical Cancer Awareness</title>
+    <style>
+        :root {
+            --primary-bg: #f3e5f5;
+            --nav-bg: #ce93d8;
+            --text-color: #333;
+            --accent-color: #8e24aa;
+            --slide-bg: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        nav {
+            background-color: var(--nav-bg);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1000;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+        }
+        .slide-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            background: var(--slide-bg);
+            padding: 50px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            animation: fadeIn 0.4s ease-out;
+            box-sizing: border-box;
+        }
+        .slide.active {
+            display: block;
+        }
+        h2 {
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+        }
+        ul {
+            text-align: left;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            display: inline-block;
+            margin: 0 auto;
+        }
+        p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+        }
+        .controls {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background-color: var(--primary-bg);
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(142, 36, 170, 0.3);
+        }
+        button:hover:not(:disabled) {
+            background-color: #6a1b9a;
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            background-color: #e1bee7;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+        #slideIndicator {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            min-width: 60px;
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @media (max-width: 600px) {
+            h2 { font-size: 1.8rem; }
+            p, ul { font-size: 1.1rem; }
+            .slide { padding: 30px 20px; }
+            nav { gap: 10px; }
+            nav a { font-size: 0.9rem; padding: 6px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Cervical Cancer Quiz</a>
+        <a href="cervical-cancer-awareness.html">Cervical Cancer Awareness</a>
+        <a href="menstruation-hygiene.html">Menstruation Health</a>
+        <a href="adolescence-young-boys.html">Adolescence in Boys</a>
+    </nav>
+
+    <div class="slide-container">
+        <div class="slide active">
+            <h2>1. Introduction</h2>
+            <p>Cervical cancer is a type of cancer that develops in the cervix, the lower part of the uterus that connects to the vagina. It is one of the most common cancers affecting women, especially in developing countries.</p>
+            <br>
+            <p>The good news is that it is highly preventable and treatable if detected early.</p>
+        </div>
+        <div class="slide">
+            <h2>2. Causes</h2>
+            <p><strong>The primary cause of cervical cancer is:</strong></p>
+            <ul>
+                <li>Persistent infection with Human Papillomavirus (HPV)</li>
+            </ul>
+            <br>
+            <p><strong>Risk Factors:</strong></p>
+            <ul>
+                <li>Early sexual activity</li>
+                <li>Multiple sexual partners</li>
+                <li>Weak immune system</li>
+                <li>Smoking</li>
+                <li>Long-term use of oral contraceptives</li>
+                <li>Poor genital hygiene</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>3. Signs and Symptoms</h2>
+            <p>In its early stages, cervical cancer may not show any symptoms. As it progresses, symptoms may include:</p>
+            <br>
+            <ul>
+                <li>Abnormal vaginal bleeding (between periods or after menopause)</li>
+                <li>Unusual vaginal discharge (sometimes foul-smelling)</li>
+                <li>Pain during intercourse</li>
+                <li>Pelvic pain</li>
+                <li>Heavy or prolonged menstrual periods</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>4. Prevention</h2>
+            <p>Cervical cancer is one of the most preventable cancers in the world.</p>
+            <br>
+            <p><strong>Key Preventive Measures:</strong></p>
+            <ul>
+                <li><strong>HPV Vaccination:</strong> Recommended for girls and young women (and often boys/young men).</li>
+                <li><strong>Regular Screening:</strong> Routine Pap smears and HPV testing.</li>
+                <li><strong>Safe Sex Practices:</strong> Reducing the risk of HPV transmission.</li>
+                <li><strong>Lifestyle Choices:</strong> Avoiding smoking and maintaining a healthy weight.</li>
+                <li><strong>Hygiene:</strong> Maintaining proper menstrual and genital hygiene.</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>5. Importance of Awareness</h2>
+            <ul>
+                <li><strong>Life-Saving:</strong> Early detection significantly increases survival rates.</li>
+                <li><strong>Routine Action:</strong> Encourages women to undergo regular screenings without fear.</li>
+                <li><strong>Stigma Reduction:</strong> Breaks down barriers regarding reproductive health discussions.</li>
+                <li><strong>Education:</strong> Promotes the long-term benefits of vaccination and preventive care.</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>6. Key Message</h2>
+            <br>
+            <p style="font-size: 1.5rem; font-weight: bold; font-style: italic; color: var(--accent-color);">
+                "Prevention is better than cure. Regular screening and vaccination can protect women from cervical cancer."
+            </p>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn" onclick="prevSlide()">Previous</button>
+        <span id="slideIndicator">1 / N</span>
+        <button id="nextBtn" onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideIndicator = document.getElementById('slideIndicator');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentSlideIndex) {
+                    slide.classList.add('active');
+                }
+            });
+            prevBtn.disabled = currentSlideIndex === 0;
+            nextBtn.disabled = currentSlideIndex === slides.length - 1;
+            slideIndicator.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSlides();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        updateSlides();
+    </script>
+</body>
+</html>

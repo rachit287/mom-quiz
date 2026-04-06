@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menstruation Health</title>
+    <style>
+        :root {
+            --primary-bg: #fff0f5;
+            --nav-bg: #ffb6c1;
+            --text-color: #333;
+            --accent-color: #d81b60;
+            --slide-bg: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        nav {
+            background-color: var(--nav-bg);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1000;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+        }
+        .slide-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            background: var(--slide-bg);
+            padding: 50px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            animation: fadeIn 0.4s ease-out;
+            box-sizing: border-box;
+        }
+        .slide.active {
+            display: block;
+        }
+        h2 {
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+        }
+        ul {
+            text-align: left;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            display: inline-block;
+            margin: 0 auto;
+        }
+        p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+        }
+        .controls {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background-color: var(--primary-bg);
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(216, 27, 96, 0.3);
+        }
+        button:hover:not(:disabled) {
+            background-color: #ad1457;
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            background-color: #f48fb1;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+        #slideIndicator {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            min-width: 60px;
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @media (max-width: 600px) {
+            h2 { font-size: 1.8rem; }
+            p, ul { font-size: 1.1rem; }
+            .slide { padding: 30px 20px; }
+            nav { gap: 10px; }
+            nav a { font-size: 0.9rem; padding: 6px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Cervical Cancer Quiz</a>
+        <a href="cervical-cancer-awareness.html">Cervical Cancer Awareness</a>
+        <a href="menstruation-hygiene.html">Menstruation Health</a>
+        <a href="adolescence-young-boys.html">Adolescence in Boys</a>
+    </nav>
+
+    <div class="slide-container">
+        <div class="slide active">
+            <h2>Menstrual Hygiene & Cervical Cancer Awareness</h2>
+            <p><strong>Workshop for Girls (Age 9–16)</strong><br>
+            Learn • Understand • Stay Healthy</p>
+        </div>
+        <div class="slide">
+            <h2>Objectives</h2>
+            <ul>
+                <li>Understand puberty and periods</li>
+                <li>Learn menstrual hygiene</li>
+                <li>Break myths and taboos</li>
+                <li>Basic awareness of cervical cancer</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>What is Puberty?</h2>
+            <ul>
+                <li>Natural stage of growing up</li>
+                <li>Changes in body and mind</li>
+                <li>Breast development, hair growth</li>
+                <li>Emotional changes</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>What is Menstruation?</h2>
+            <ul>
+                <li>Monthly bleeding from uterus</li>
+                <li>Normal and healthy process</li>
+                <li>Starts between 9–15 years</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Menstrual Hygiene</h2>
+            <ul>
+                <li>Use clean pads or cloth</li>
+                <li>Change every 4–6 hours</li>
+                <li>Wash with clean water</li>
+                <li>Keep area dry</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Types of Products</h2>
+            <ul>
+                <li>Sanitary pads</li>
+                <li>Clean cloth</li>
+                <li>Tampons (older girls)</li>
+                <li>Menstrual cups (older girls)</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Do’s During Periods</h2>
+            <ul>
+                <li>Stay clean</li>
+                <li>Eat healthy food</li>
+                <li>Stay active</li>
+                <li>Go to school</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Don’ts During Periods</h2>
+            <ul>
+                <li>Don’t use dirty cloth</li>
+                <li>Don’t hide or feel ashamed</li>
+                <li>Don’t ignore hygiene</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Myths vs Facts</h2>
+            <p><strong>Myth:</strong> Cannot bathe<br>
+            <strong>Fact:</strong> Bathing is good</p>
+            <br>
+            <p><strong>Myth:</strong> Cannot go to school<br>
+            <strong>Fact:</strong> You can do normal activities</p>
+        </div>
+        <div class="slide">
+            <h2>What is Cervical Cancer?</h2>
+            <ul>
+                <li>Disease of cervix (lower uterus)</li>
+                <li>Caused by HPV infection</li>
+                <li>Preventable</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Prevention</h2>
+            <ul>
+                <li>Maintain hygiene</li>
+                <li>HPV vaccination (in future)</li>
+                <li>Regular health check-ups</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Ask Questions Freely</h2>
+            <ul>
+                <li>No shame, no fear</li>
+                <li>Use question box</li>
+                <li>Talk openly</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Thank You</h2>
+            <p>Take care of your body<br>
+            Stay healthy and confident 🌸</p>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn" onclick="prevSlide()">Previous</button>
+        <span id="slideIndicator">1 / N</span>
+        <button id="nextBtn" onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideIndicator = document.getElementById('slideIndicator');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentSlideIndex) {
+                    slide.classList.add('active');
+                }
+            });
+            prevBtn.disabled = currentSlideIndex === 0;
+            nextBtn.disabled = currentSlideIndex === slides.length - 1;
+            slideIndicator.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSlides();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        updateSlides();
+    </script>
+</body>
+</html>
