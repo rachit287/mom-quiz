@@ -2,30 +2,25 @@
 
 ---
 
-## [FEAT-001]: [Feature Title]
+## [FEAT-001]: .txt Stubs to Slide Decks (.html pages)
 **ID:** FEAT-001
 **Status:** Pending
-**Dependencies:** [e.g., FEAT-001 (User Auth), Database Schema v1]
+**Dependencies:** None
 **Files Impacted:** [To be updated by Agent]
 
 ### 1. User Story
-* **As a** [type of user]
-* **I want to** [perform action]
-* **So that** [achieve value]
+* **As a** regular user who arrives at this app
+* **I want to** see an informative slide deck (.html page) with 7-10 slides which has pulled context from the stubs (.txt) in the working directory
+* **So that** I can learn more about the required topic. 
 
 ### 2. Acceptance Criteria (AC)
 #### A. Functional Requirements
-* [ ] AC 1: [Specific behavior]
-* [ ] AC 2: [Specific behavior]
+* [ ] AC 1: Users should be able to click a 'Next' or 'Previous' Button to go ahead or back.
 
 #### B. UI/UX States (Required)
-* [ ] **Success:** [What happens when it works?]
-* [ ] **Loading:** [Visual feedback during async calls.]
-* [ ] **Error:** [Validation messages for invalid inputs.]
-* [ ] **Empty:** [What shows if there is no data?]
+* [ ] **Success:** Simple forward and backward navigation buttons for slides. 
 
 #### C. Technical Validation
-* [ ] Feature must pass existing unit tests.
 * [ ] Responsive design verified (Mobile/Desktop).
 
 ### 3. Agent Build Notes
