@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cervical Cancer Awareness – Interactive Quiz</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=Nunito+Sans:wght@400;600&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -419,6 +419,7 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     color: #333;
     margin: auto;
+    font-family: 'Nunito', sans-serif;
   }
   .modal-title {
     font-size: 2rem;
@@ -478,10 +479,28 @@
     line-height: 1.4;
   }
   @media (max-width: 768px) {
-    .modal-grid { grid-template-columns: repeat(2, 1fr); }
-    .modal-content { padding: 30px 20px; }
-    .tile-title { font-size: 1.35rem; }
-    .tile-desc { font-size: 0.9rem; }
+    .modal-content {
+        padding: 30px 20px;
+        width: 95%;
+        max-width: 480px;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+    .modal-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    .modal-tile {
+        aspect-ratio: unset;
+        padding: 25px 15px;
+    }
+    .tile-title {
+        font-size: 1.1rem;
+        margin-bottom: 0;
+    }
+    .tile-desc {
+        display: none;
+    }
   }
 </style>
 </head>
