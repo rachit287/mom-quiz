@@ -22,30 +22,6 @@
             flex-direction: column;
             height: 100vh;
         }
-        nav {
-            background-color: var(--nav-bg);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1000;
-        }
-        nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 20px;
-            background-color: rgba(255, 255, 255, 0.6);
-            transition: all 0.3s ease;
-        }
-        nav a:hover {
-            background-color: rgba(255, 255, 255, 1);
-            transform: translateY(-2px);
-        }
         .slide-container {
             flex-grow: 1;
             display: flex;
@@ -131,19 +107,161 @@
             h2 { font-size: 1.8rem; }
             p, ul { font-size: 1.1rem; }
             .slide { padding: 30px 20px; }
-            nav { gap: 10px; }
-            nav a { font-size: 0.9rem; padding: 6px 12px; }
+        }
+
+        /* Menu Button & Modal Styles */
+        #menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            transition: transform 0.2s, background 0.2s;
+        }
+        #menu-btn:hover {
+            background: #ffffff;
+            transform: translateX(-50%) scale(1.05);
+        }
+        #menu-btn .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            border-radius: 2px;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            color: #333;
+            margin: auto;
+        }
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 2.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            line-height: 1;
+            transition: color 0.2s;
+            padding: 0;
+        }
+        .close-btn:hover { color: #000; }
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .modal-tile {
+            background: #fdfdfd;
+            border: 2px solid #eaeaea;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            aspect-ratio: 1;
+        }
+        .modal-tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: #ccc;
+        }
+        .tile-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        .tile-desc {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #777;
+            line-height: 1.4;
+        }
+        @media (max-width: 768px) {
+            .modal-grid { grid-template-columns: repeat(2, 1fr); }
+            .modal-content { padding: 30px 20px; }
+            .tile-title { font-size: 1.35rem; }
+            .tile-desc { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html">Cervical Cancer Quiz</a>
-        <a href="cervical-cancer-awareness.html">Cervical Cancer Awareness</a>
-        <a href="menstruation-hygiene.html">Menstruation Health</a>
-        <a href="adolescence-young-boys.html">Adolescence in Boys</a>
-    </nav>
+    <!-- Menu Button -->
+    <button id="menu-btn" onclick="openModal()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </button>
+
+    <!-- Navigation Modal -->
+    <div id="nav-modal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal(event)">&times;</button>
+            <h2 class="modal-title">Select your topic</h2>
+            <div class="modal-grid">
+                <a href="index.html" class="modal-tile">
+                    <div class="tile-title">Cervical Cancer Quiz</div>
+                    <div class="tile-desc">Test your knowledge with an interactive quiz.</div>
+                </a>
+                <a href="cervical-cancer-awareness.html" class="modal-tile">
+                    <div class="tile-title">Cervical Cancer Awareness</div>
+                    <div class="tile-desc">Learn causes, symptoms, and prevention methods.</div>
+                </a>
+                <a href="menstruation-hygiene.html" class="modal-tile">
+                    <div class="tile-title">Menstruation Health</div>
+                    <div class="tile-desc">Understand puberty, periods, and essential hygiene.</div>
+                </a>
+                <a href="adolescence-young-boys.html" class="modal-tile">
+                    <div class="tile-title">Adolescence in Boys</div>
+                    <div class="tile-desc">Navigate physical and emotional changes confidently.</div>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <div class="slide-container">
         <div class="slide active">
@@ -301,6 +419,14 @@
         });
 
         updateSlides();
+
+        function openModal() {
+            document.getElementById('nav-modal').style.display = 'flex';
+        }
+        function closeModal(e) {
+            if (e) e.stopPropagation();
+            document.getElementById('nav-modal').style.display = 'none';
+        }
     </script>
 </body>
 </html>
